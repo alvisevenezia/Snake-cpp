@@ -1,15 +1,26 @@
 #pragma once
 #include "matrice.h"
+#include "network.h"
 
 class Snake {
 
+private:
+
 	int id;
 	long score;
-	matrice* grille;
+	matrice* grillen;
+	network* networkn;
 
-	Snake();
+public:
+
+	Snake(network* network,matrice* grille);
+
+	void initializeNetwork(int size, std::vector<int> sizel);
+
+	matrice* getGrid();
+
+	network* getNetwork();
 
 };
-
 
 

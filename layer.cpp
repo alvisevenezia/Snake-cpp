@@ -31,6 +31,9 @@ int layer::initializeWeights(matrice* mat1, matrice* mat2) {
 		}
 
 	}
+
+	return 0;
+
 }
 
 int layer::initializeBias(matrice* mat1, matrice* mat2) {
@@ -56,12 +59,12 @@ int layer::initializeBias(matrice* mat1, matrice* mat2) {
 
 	}
 
+	return 0;
+
 }
 
-int layer::compute(matrice* input,matrice* output) {
+matrice* layer::compute(matrice* input) {
 
-	output = addMat(multiplyMat(weight, input), bias);
-
-	return 0;
+	return addMat(multiplyMat(weight, input), bias);
 
 }

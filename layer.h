@@ -1,5 +1,6 @@
 #pragma once
 #include "matrice.h"
+#include "mouvements.h"
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
@@ -17,7 +18,7 @@ public:
 
 	layer(int size,int sizen,int id);
 
-	int compute(matrice* input, matrice* output);
+	matrice* compute(matrice* input);
 
 	int initializeWeights(matrice* mat1, matrice* mat2);
 

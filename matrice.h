@@ -24,10 +24,12 @@ public:
 
 	std::vector<float> fillMatbyID(int x, int y, float val);
 
-	void randomlyFill(int min, int max);
+	void randomlyFill(float min, float max);
 
 };
 
 matrice* multiplyMat(matrice* mat1, matrice* mat2);
 
 matrice* addMat(matrice* mat1, matrice* mat2);
+
+int minDistance(matrice* ref, matrice* B);

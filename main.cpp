@@ -6,7 +6,7 @@ int main() {
 	int height = 2;
 
 	matrice* mat = new matrice(nullptr,width, height);
-	mat->mat = {1,2,3,4,5,6,7,8,9,10};
+	mat->randomlyFill(0, 5);
 	(*mat).printMatInt();
 
 	std::cout << "\n";

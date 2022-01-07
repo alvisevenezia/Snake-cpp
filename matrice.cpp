@@ -21,7 +21,27 @@ matrice::matrice(std::vector<float>* arg,int matWidth,int matHeight) {
 
 }
 
-void matrice::randomlyFill(int min, int max) {
+int minsDistance(matrice* ref,matrice* B){
+	
+	if (ref->height != B->height && ref->width != B->width) {
+
+		std::cout << "Matrice de taille différente\n" ;
+		return -1;
+
+	}
+
+	int min = abs(B->mat[0] - ref->mat[0]);
+
+	for (int id = 1; id < ref->height * ref->width; id++) {
+
+		min = (abs(B->mat[id] - ref->mat[id])) < min ? abs(B->mat[id] - ref->mat[id]): min;
+
+	}
+
+	return min;
+}
+
+void matrice::randomlyFill(float min, float max) {
 
 	srand(static_cast <unsigned> (time(0)));
 

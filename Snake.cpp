@@ -1,15 +1,15 @@
 #include <vector>
-class Snake {
+#include "Snake.h"
 
-public:
-	int id = 0;
-	long score = 0;
-	std::vector<float> grille;
+Snake::Snake(network* network, matrice* grille) {
 
-	Snake(int size) {
+	Snake::networkn = network;
+	Snake::grillen = grille;
 
-	
+}
 
-	}
+void Snake::initializeNetwork(int size, std::vector<int> sizel) {
 
-};
+	Snake::networkn = new network()
+
+}
