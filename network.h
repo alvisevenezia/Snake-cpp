@@ -6,14 +6,17 @@
 
 class network {
 
-private:
+public:
 	
+	int size;
 	std::vector<layer*> layers;
 	std::vector<int>sizel;
 
-public:
+	network(int size,std::vector<int> sizel);//size is for number of layer, sizel is for size of each layer and ri is for ramdomly initialize layer
 
-	network(int size,std::vector<int> sizel,bool dor);//size is for number of laye, sizel is for size of each layer and dor is for ramdomly initialize layer
+	void initializeLayers();
+
+	void mergeNetworks(network* n1, network* n2);
 
 	int* compute(matrice* input);
 

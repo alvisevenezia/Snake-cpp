@@ -22,11 +22,17 @@ public:
 
 	void printMatInt();
 
+	void scaleMat(int n);
+
+	void printMatFloat();
+
 	std::vector<float> fillMatbyID(int x, int y, float val);
 
 	void randomlyFill(float min, float max);
 
 };
+
+
 
 matrice* multiplyMat(matrice* mat1, matrice* mat2);
 

@@ -7,18 +7,22 @@
 
 class layer {
 
-private:
+public:
 	matrice* weight;
 	matrice* bias;
 	int height;
 	int width;
 	int id; //util?
 
-public:
-
 	layer(int size,int sizen,int id);
 
+	matrice* getWeights();
+
+	matrice* getBias();
+
 	matrice* compute(matrice* input);
+
+	matrice* normalizeOutput(matrice* output);
 
 	int initializeWeights(matrice* mat1, matrice* mat2);
 

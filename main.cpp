@@ -1,30 +1,35 @@
 #include "matrice.h"
+#include "network.h"
 
 int main() {
 
-	int width = 5;
-	int height = 2;
-
-	matrice* mat = new matrice(nullptr,width, height);
-	mat->randomlyFill(0, 5);
-	(*mat).printMatInt();
-
-	std::cout << "\n";
-
-	matrice *mat2 = new matrice(nullptr, 3, width);
-	mat2->mat = {6,5,4,3,2,4,5,6,7,8,9,6,7,8,9};
+	matrice *mat2 = new matrice(nullptr, 4, 1);
+	mat2->mat = {6,5,4,3};
 	(*mat2).printMatInt();
 
 	std::cout << "\n";
 
-	matrice* matR = multiplyMat(mat, mat2);
-	(*matR).printMatInt();
+	network* n = new network(3, {4,5,7});
 
-	std::cout << "\n";	
-
-	matrice* matR2 = addMat(mat, mat);
-	(*matR2).printMatInt();
-		
+	n->layers[0]->weight->printMatFloat();
+	printf("\n\n\n");
+	n->layers[0]->bias->printMatFloat();
+	printf("\n\n\n");
+	n->layers[1]->weight->printMatFloat();
+	printf("\n\n\n");
+	n->layers[1]->bias->printMatFloat();
+	printf("\n\n\n");
+	n->layers[2]->weight->printMatFloat();
+	printf("\n\n\n");
+	n->layers[2]->bias->printMatFloat();
 	printf("\n\n\n");
 
+	int* output = n->compute(mat2);
+
+	for (int id = 0; id < 4;id++) {
+
+		printf("%i\n", output[id]);
+
+	}
+	
 }

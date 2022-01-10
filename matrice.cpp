@@ -21,7 +21,7 @@ matrice::matrice(std::vector<float>* arg,int matWidth,int matHeight) {
 
 }
 
-int minsDistance(matrice* ref,matrice* B){
+int minDistance(matrice* ref,matrice* B){
 	
 	if (ref->height != B->height && ref->width != B->width) {
 
@@ -47,11 +47,10 @@ void matrice::randomlyFill(float min, float max) {
 
 	for (int id = 0; id < width * height; id++) {
 
-		mat[id] = static_cast <float>(min) + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / static_cast <float>(max - min)));
+		mat[id] = static_cast <float>(min) + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / static_cast <float>((max - min))));
 
 	}
 
-	
 }
 
 
@@ -71,6 +70,21 @@ void matrice::printMatInt() {
 		printf("%i ", (int)f);
 
 		cpt++;
+		if (width != 1 || cpt % width == 0)printf("\n");
+
+	}
+
+}
+
+void matrice::printMatFloat() {
+
+	int cpt = 0;
+
+	for (float f : matrice::mat) {
+
+		printf("%f ",f);
+
+		cpt++;
 		if (cpt % width == 0)printf("\n");
 
 	}
@@ -84,6 +98,19 @@ std::vector<float> matrice::fillMatbyID(int x, int y, float val) {
 	mat[pos] = val;
 
 	return mat;
+}
+
+void matrice::scaleMat(int n) {
+
+	int old = height;
+	height *= n;
+
+	for (int id = 0; id < width * n; id++) {
+
+		mat[old + id] = mat[id % old];
+
+	}
+
 }
 
 matrice* multiplyMat(matrice* mat1, matrice* mat2) {

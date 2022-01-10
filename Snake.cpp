@@ -10,6 +10,6 @@ Snake::Snake(network* network, matrice* grille) {
 
 void Snake::initializeNetwork(int size, std::vector<int> sizel) {
 
-	Snake::networkn = new network()
+	Snake::networkn = new network(size,sizel);
 
 }
