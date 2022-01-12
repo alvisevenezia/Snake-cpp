@@ -1,26 +1,44 @@
 #pragma once
 #include "matrice.h"
 #include "network.h"
+#include "snakePart.h"
 
-class Snake {
+class snake {
 
-private:
+public:
 
 	int id;
 	long score;
 	matrice* grillen;
 	network* networkn;
+	snakePart* head;
 
-public:
-
-	Snake(network* network,matrice* grille);
+	snake(network* network,matrice* grille);
 
 	void initializeNetwork(int size, std::vector<int> sizel);
 
-	matrice* getGrid();
+	int spawnSnake(int x, int y) {
 
-	network* getNetwork();
+		if (head == nullptr) {
 
+			head = new snakePart();
+			head->id = 1;
+			head->next = nullptr;
+			head->previous = nullptr;
+
+		}
+
+		head->x = x;
+		head->y = y;
+
+		grillen->mat[x + y * grillen->width] = 1;
+
+		return 0;
+	}
+
+	int move(int* m);
+
+	int translateMat(char c);
 };
 
 

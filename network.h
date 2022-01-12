@@ -18,6 +18,6 @@ public:
 
 	void mergeNetworks(network* n1, network* n2);
 
-	int* compute(matrice* input);
+	char compute(matrice* input);
 
 };

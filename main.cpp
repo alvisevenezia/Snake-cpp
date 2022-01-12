@@ -1,35 +1,31 @@
 #include "matrice.h"
 #include "network.h"
+#include "snake.h"
 
 int main() {
 
-	matrice *mat2 = new matrice(nullptr, 4, 1);
+	matrice *mat2 = new matrice(nullptr, 1, 4);
 	mat2->mat = {6,5,4,3};
 	(*mat2).printMatInt();
 
 	std::cout << "\n";
 
-	network* n = new network(3, {4,5,7});
+	network* n = new network(3, {10,50,400});
 
-	n->layers[0]->weight->printMatFloat();
-	printf("\n\n\n");
-	n->layers[0]->bias->printMatFloat();
-	printf("\n\n\n");
-	n->layers[1]->weight->printMatFloat();
-	printf("\n\n\n");
-	n->layers[1]->bias->printMatFloat();
-	printf("\n\n\n");
-	n->layers[2]->weight->printMatFloat();
-	printf("\n\n\n");
-	n->layers[2]->bias->printMatFloat();
-	printf("\n\n\n");
+	matrice* grille = new matrice(nullptr, 17, 17);
+	grille->fill(0.0);
+	grille->fillMatbyID(7, 8, -1);
+	grille->printMatInt();
 
-	int* output = n->compute(mat2);
+	std::cout << '\n' << std::endl;
 
-	for (int id = 0; id < 4;id++) {
+	snake* s = new snake(n,grille);
+	s->spawnSnake(8, 8);
+	s->grillen->printMatInt();
 
-		printf("%i\n", output[id]);
+	int m[2] = {-1,0};
 
-	}
-	
+	s->move(m);
+	std::cout << '\n' << std::endl;
+	s->grillen->printMatInt();
 }

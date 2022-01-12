@@ -70,7 +70,7 @@ void matrice::printMatInt() {
 		printf("%i ", (int)f);
 
 		cpt++;
-		if (width != 1 || cpt % width == 0)printf("\n");
+		if (cpt % width == 0)printf("\n");
 
 	}
 
@@ -100,16 +100,18 @@ std::vector<float> matrice::fillMatbyID(int x, int y, float val) {
 	return mat;
 }
 
-void matrice::scaleMat(int n) {
+matrice* matrice::scaleMat(int n) {
 
 	int old = height;
 	height *= n;
 
-	for (int id = 0; id < width * n; id++) {
+	for (int id = width; id < width * n; id++) {
 
-		mat[old + id] = mat[id % old];
+		mat.insert(mat.end(),mat[id % width]);
 
 	}
+
+	return this;
 
 }
 

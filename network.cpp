@@ -16,7 +16,7 @@ void network::initializeLayers() {
 
 	for (int id = 0; id < size; id++) {
 
-		layers.insert(layers.end(),new layer(sizel[id],id == 0? 1:sizel[id-1],id));
+		layers.insert(layers.end(),new layer(sizel[id],id == 0? 4:sizel[id-1],id));
 		layers[id]->initializeWeights(nullptr,nullptr);
 		layers[id]->initializeBias(nullptr, nullptr);
 
@@ -36,14 +36,15 @@ void network::mergeNetworks(network* n1, network* n2) {
 
 }
 
-int * network::compute(matrice* input) {
+char network::compute(matrice* input) {
 
 	matrice* output{};
 
 	for (int id = 0; id < layers.size();id++) {
 
-		output = layers[id]->compute(id == 0 ? input->scaleMat(sizel[0]): output->scaleMat(sizel[id]));
+		output = layers[id]->compute(id == 0 ? input: output);
 		output->printMatFloat();
+		std::cout << "\n" << std::endl;
 	}
 
 	int d[4] = { 0,0,0,0 };
@@ -53,7 +54,7 @@ int * network::compute(matrice* input) {
 	int DOWN[4] = { 0,0,0,1 };
 	int LEFT[4] = { 1,0,0,0 };
 
-	matrice* ref = new matrice(nullptr, 4, 1);
+	matrice* ref = new matrice(nullptr, 1, 4);
 	ref->mat = { 0,1,0,0 };
 	d[0] = minDistance(ref,output);
 	ref->mat = { 0,0,1,0 };
@@ -65,9 +66,9 @@ int * network::compute(matrice* input) {
 
 	int min = std::min(std::min(d[0], d[1]), std::min(d[2], d[3]));
 
-	if (min == d[0])return UP;
-	if (min == d[1])return RIGHT;
-	if (min == d[2])return DOWN;
-	if (min == d[3])return LEFT;
-	return nullptr;
+	if (min == d[0])return 'U';
+	if (min == d[1])return 'R';
+	if (min == d[2])return 'D';
+	if (min == d[3])return 'L';
+	return ' ';
 }

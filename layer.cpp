@@ -31,7 +31,6 @@ matrice* layer::normalizeOutput(matrice* output) {
 		f = f > 0 ? f : 0;
 
 	}
-
 	return output;
 }
 
@@ -89,6 +88,6 @@ int layer::initializeBias(matrice* mat1, matrice* mat2) {
 
 matrice* layer::compute(matrice* input) {
 
- 	return normalizeOutput(addMat(multiplyMat((input, weight), bias));
+ 	return normalizeOutput(addMat(multiplyMat(weight, input), bias));
 
 }

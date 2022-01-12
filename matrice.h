@@ -22,7 +22,7 @@ public:
 
 	void printMatInt();
 
-	void scaleMat(int n);
+	matrice* scaleMat(int n);
 
 	void printMatFloat();
 
