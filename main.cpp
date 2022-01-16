@@ -28,4 +28,11 @@ int main() {
 	s->move(m);
 	std::cout << '\n' << std::endl;
 	s->grillen->printMatInt();
+
+	m[0] = 0;
+	m[1] = -1;
+
+	s->move(m);
+	std::cout << '\n' << std::endl;
+	s->grillen->printMatInt();
 }

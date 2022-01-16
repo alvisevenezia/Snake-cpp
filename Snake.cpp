@@ -26,9 +26,9 @@ int snake::move(int *m) {
 
 		if (tampon->id == 1) {
 
-			if (head->x + m[0] + head->y * grillen->width + m[1] >= 0 && head->x + m[0] + head->y * grillen->width + m[1] < grillen->height * grillen->width) {
+			if (head->x + m[0] + head->y * (grillen->width + m[1]) >= 0 && head->x + m[0] + head->y * (grillen->width + m[1]) < grillen->height * grillen->width) {
 
-				if (grillen->mat[head->x + m[0] + head->y * grillen->width + m[1]] <= 0) {
+				if (grillen->mat[head->x + m[0] + head->y * (grillen->width + m[1])] <= 0) {
 
 					snakePart* nh = new snakePart();
 					nh->next = head;
@@ -38,22 +38,26 @@ int snake::move(int *m) {
 					nh->id = 1;
 					head->previous = nh;
 
-					if (grillen->mat[head->x + m[0] + head->y * grillen->width + m[1]] == -1) {
+					if (grillen->mat[head->x + m[0] + head->y * (grillen->width + m[1])] == -1) {
 
 						snakePart* t = head;
 
 						while (t->next != nullptr) {
-							t->id++;
+	
 							t = t->next;
 						}
 						snakePart* ne = new snakePart();
 						ne->id = t->id++;
+						ne->next = nullptr;
 						t->next = ne;
 						ne->previous = t;
 
 					}
 
-					grillen->mat[head->x + m[0] + head->y * grillen->width + m[1]] = 1;
+					grillen->mat[head->x + m[0] + head->y * (grillen->width + m[1])] = 1;
+					head = nh;
+
+					tampon = tampon->next;
 
 				} 
 				else {
@@ -75,8 +79,6 @@ int snake::move(int *m) {
 				free(tampon);
 				return 0;
 			}
-
-			tampon->id++;
 
 			grillen->mat[tampon->x+ tampon->y * grillen->width] = tampon->id--;
 
