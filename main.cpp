@@ -15,6 +15,7 @@ int main() {
 	matrice* grille = new matrice(nullptr, 17, 17);
 	grille->fill(0.0);
 	grille->fillMatbyID(7, 8, -1);
+	grille->fillMatbyID(7, 10, -1);
 	grille->printMatInt();
 
 	std::cout << '\n' << std::endl;
@@ -30,9 +31,14 @@ int main() {
 	s->grillen->printMatInt();
 
 	m[0] = 0;
-	m[1] = -1;
+	m[1] = 1;
 
 	s->move(m);
 	std::cout << '\n' << std::endl;
 	s->grillen->printMatInt();
+
+	s->move(m);
+	std::cout << '\n' << std::endl;
+	s->grillen->printMatInt();
+
 }

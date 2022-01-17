@@ -1,5 +1,6 @@
 #include <vector>
 #include "snake.h"
+#include <assert.h>
 
 snake::snake(network* network, matrice* grille) {
 
@@ -20,73 +21,72 @@ void snake::initializeNetwork(int size, std::vector<int> sizel) {
 
 int snake::move(int *m) {
 
-	snakePart* tampon = head;
+	assert(head != nullptr);
 
-	while (tampon != nullptr) {
+	int tx = head->x + m[0];
+	int ty = head->y + m[1];
 
-		if (tampon->id == 1) {
-
-			if (head->x + m[0] + head->y * (grillen->width + m[1]) >= 0 && head->x + m[0] + head->y * (grillen->width + m[1]) < grillen->height * grillen->width) {
-
-				if (grillen->mat[head->x + m[0] + head->y * (grillen->width + m[1])] <= 0) {
-
-					snakePart* nh = new snakePart();
-					nh->next = head;
-					nh->previous = nullptr;
-					nh->x = head->x + m[0];
-					nh->y = head->y + m[1];
-					nh->id = 1;
-					head->previous = nh;
-
-					if (grillen->mat[head->x + m[0] + head->y * (grillen->width + m[1])] == -1) {
-
-						snakePart* t = head;
-
-						while (t->next != nullptr) {
+	snakePart* tampon;
 	
-							t = t->next;
-						}
-						snakePart* ne = new snakePart();
-						ne->id = t->id++;
-						ne->next = nullptr;
-						t->next = ne;
-						ne->previous = t;
+	//check if the snake snake is about to move out of the game
+	if (0 <= tx && tx <= grillen->width && 0 <= ty && ty <= grillen->height) {
 
-					}
+		//check if the snake is about to eat an apple
+		if (grillen->mat[ty * grillen->width + tx] == -1) {
 
-					grillen->mat[head->x + m[0] + head->y * (grillen->width + m[1])] = 1;
-					head = nh;
+			//we add a new snakePart as a new head and we shift all id by one
+			
+			head->previous = new snakePart();
+			head->previous->next = head;
+			head->previous->previous = nullptr;
+			head->previous->id = 1;
+			head->previous->x = tx;
+			head->previous->y = ty;
+			grillen->mat[ty * grillen->width + tx] = 1;
+			
+			head = head->previous;
 
-					tampon = tampon->next;
+			tampon = head;
 
-				} 
-				else {
-
-					printf("GAME OVER");
-					return 0;
-
-				}
-
+			//shift all the ids
+			while (tampon->next != nullptr) {
+				
+				tampon = tampon->next;
+				tampon->id = tampon->id++;
+				grillen->mat[tampon->y * grillen->width + tampon->x] = tampon->id;
+			
 			}
 
 		}
-		else {
+		//check if the snake if about to move on a free place
+		else if(grillen->mat[ty * grillen->width + tx] == 0){
 
-			if (tampon->next == nullptr) {
+			tampon = head;
+			//go to the tail
+			while (tampon->next != nullptr)tampon = tampon->next;
 
-				tampon->previous->next = nullptr;
-				grillen->mat[tampon->x + tampon->y * grillen->width] = 0;
-				free(tampon);
-				return 0;
+			//delete the tail on the grid
+			grillen->mat[tampon->y * grillen->width + tampon->x] = 0;
+
+			//upadte the location of each snake part and update the grid
+			while (tampon != head) {
+
+				tampon->x = tampon->previous->x;
+				tampon->y = tampon->previous->y;
+				grillen->mat[tampon->y * grillen->width + tampon->x] = tampon->id;
+				tampon = tampon->previous;
 			}
 
-			grillen->mat[tampon->x+ tampon->y * grillen->width] = tampon->id--;
+			//move the head
+			grillen->mat[ty * grillen->width + tx] = 1;
+			head->x = tx;
+			head->y = ty;
 
-			tampon = tampon->next;
 
 		}
 
 	}
+
 	return -1;
 }
 
