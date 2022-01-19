@@ -30,6 +30,7 @@ public:
 
 	void randomlyFill(float min, float max);
 
+	matrice* transform(int width, int height);
 };
 
 

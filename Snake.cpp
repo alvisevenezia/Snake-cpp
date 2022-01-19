@@ -7,6 +7,8 @@ snake::snake(network* network, matrice* grille) {
 	snake::networkn = network;
 	snake::grillen = grille;
 	snake::head = new snakePart();
+	snake::id = NULL;
+	snake::score = 0;
 	snake::head->id = 1;
 	snake::head->next = nullptr;
 
@@ -16,6 +18,24 @@ void snake::initializeNetwork(int size, std::vector<int> sizel) {
 
 	snake::networkn = new network(size, sizel);
 
+
+}
+
+void snake::spawnSnake(int x,int y) {
+
+	if (head == nullptr) {
+
+		head = new snakePart();
+		head->id = 1;
+		head->next = nullptr;
+		head->previous = nullptr;
+
+	}
+
+	head->x = x;
+	head->y = y;
+
+	grillen->mat[x + y * grillen->width] = 1;
 
 }
 
@@ -68,7 +88,7 @@ int snake::move(int *m) {
 			//delete the tail on the grid
 			grillen->mat[tampon->y * grillen->width + tampon->x] = 0;
 
-			//upadte the location of each snake part and update the grid
+			//update the location of each snake part and update the grid
 			while (tampon != head) {
 
 				tampon->x = tampon->previous->x;
@@ -87,6 +107,7 @@ int snake::move(int *m) {
 
 	}
 
+	free(m);
 	return -1;
 }
 

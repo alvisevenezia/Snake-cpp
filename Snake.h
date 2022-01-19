@@ -17,24 +17,7 @@ public:
 
 	void initializeNetwork(int size, std::vector<int> sizel);
 
-	int spawnSnake(int x, int y) {
-
-		if (head == nullptr) {
-
-			head = new snakePart();
-			head->id = 1;
-			head->next = nullptr;
-			head->previous = nullptr;
-
-		}
-
-		head->x = x;
-		head->y = y;
-
-		grillen->mat[x + y * grillen->width] = 1;
-
-		return 0;
-	}
+	void spawnSnake(int x, int y);
 
 	int move(int* m);
 

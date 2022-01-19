@@ -53,6 +53,31 @@ void matrice::randomlyFill(float min, float max) {
 
 }
 
+//return a matrix with a new shape
+matrice* matrice::transform(int width, int height)
+{
+	//check if the taget matrix's size isn't smaller than the initial matrix
+	if (width * height < matrice::width * matrice::height) {
+
+		//return error and exit
+		printf("target matrix is too small");
+		exit(1);
+	}
+
+	//create a new matrix
+	matrice* m = new matrice(nullptr,width,height);
+
+	//copy the data
+	for (int id = 0; id < width * height; id++) {
+
+		m->mat[id] = id > matrice::height * matrice::width ? 0 : matrice::mat[id];
+
+	}
+
+	//return the new matrix
+	return m;
+}
+
 
 void matrice::fill(float val) {
 
