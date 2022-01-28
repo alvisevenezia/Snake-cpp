@@ -8,7 +8,8 @@ snake::snake(network* network, matrice* grille) {
 	snake::grillen = grille;
 	snake::head = new snakePart();
 	snake::id = NULL;
-	snake::score = 0;
+	snake::apple = 0;
+	snake::fitness = 0;
 	snake::head->id = 1;
 	snake::head->next = nullptr;
 
@@ -161,4 +162,14 @@ int snake::translateMat(char c) {
 		return -1;
 		break;
 	}
+
+}
+
+
+long snake::calculateFitness() {
+
+	fitness += pow(2, apple) + 1;
+
+	return snake::fitness;
+
 }

@@ -8,10 +8,11 @@ class snake {
 public:
 
 	int id;
-	long score;
+	int apple;
 	matrice* grillen;
 	network* networkn;
 	snakePart* head;
+	long fitness;
 
 	snake(network* network,matrice* grille);
 
@@ -22,6 +23,8 @@ public:
 	int move(int* m);
 
 	int translateMat(char c);
+
+	long calculateFitness();
 };
 
 

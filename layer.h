@@ -22,7 +22,7 @@ public:
 
 	matrice* compute(matrice* input);
 
-	matrice* normalizeOutput(matrice* output);
+	matrice* ReLUActivationFunction(matrice* output);
 
 	int initializeWeights(matrice* mat1, matrice* mat2);
 

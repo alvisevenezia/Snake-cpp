@@ -82,7 +82,7 @@ void snakeManager::compute() {
 
 		//make the network compute with the grille as the first input
 		snake->move(snake->networkn->compute(snake->grillen->transform(1, size * size)));
-
+		snake->calculateFitness();
 
 	}
 
