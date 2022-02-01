@@ -12,6 +12,7 @@ snake::snake(network* network, matrice* grille) {
 	snake::fitness = 0;
 	snake::head->id = 1;
 	snake::head->next = nullptr;
+	snake::dead = false;
 
 }
 
@@ -56,7 +57,7 @@ int snake::move(int *m) {
 		if (grillen->mat[ty * grillen->width + tx] == -1) {
 
 			//we add a new snakePart as a new head and we shift all id by one
-			
+
 			head->previous = new snakePart();
 			head->previous->next = head;
 			head->previous->previous = nullptr;
@@ -64,23 +65,23 @@ int snake::move(int *m) {
 			head->previous->x = tx;
 			head->previous->y = ty;
 			grillen->mat[ty * grillen->width + tx] = 1;
-			
+
 			head = head->previous;
 
 			tampon = head;
 
 			//shift all the ids
 			while (tampon->next != nullptr) {
-				
+
 				tampon = tampon->next;
 				tampon->id = tampon->id++;
 				grillen->mat[tampon->y * grillen->width + tampon->x] = tampon->id;
-			
+
 			}
 
 		}
 		//check if the snake if about to move on a free place
-		else if(grillen->mat[ty * grillen->width + tx] == 0){
+		else if (grillen->mat[ty * grillen->width + tx] == 0) {
 
 			tampon = head;
 			//go to the tail
@@ -105,8 +106,10 @@ int snake::move(int *m) {
 
 
 		}
+		else snake::dead = true;
 
 	}
+	else snake::dead = true;
 
 	free(m);
 	return -1;

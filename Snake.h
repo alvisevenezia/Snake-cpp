@@ -13,6 +13,7 @@ public:
 	network* networkn;
 	snakePart* head;
 	long fitness;
+	bool dead;
 
 	snake(network* network,matrice* grille);
 

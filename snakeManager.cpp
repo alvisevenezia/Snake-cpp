@@ -3,6 +3,7 @@
 snakeManager::snakeManager(int popNumber,int size, std::vector<int> sizel) {
 
 	snakeManager::popNumber = popNumber;
+	snakeManager::alive = popNumber;
 	snakeManager::sizel = sizel;
 	snakeManager::size = size;
 }
@@ -77,12 +78,30 @@ void snakeManager::compute() {
 	//for each snake in the vector
 	for (int id = 0; id < popNumber; id++) {
 
-		//get the snake
-		snake = snakeManager::snakeVector[id];
+		//check if the snake is alive
+		if (!snakeManager::snakeVector[id]->dead) {
 
-		//make the network compute with the grille as the first input
-		snake->move(snake->networkn->compute(snake->grillen->transform(1, size * size)));
-		snake->calculateFitness();
+			//get the snake
+			snake = snakeManager::snakeVector[id];
+
+			//make the network compute with the grid as the first input
+			snake->move(snake->networkn->compute(snake->grillen->transform(1, size * size)));
+
+			//compute the fitness of the snake
+			snake->calculateFitness();
+
+		}
+
+		//if the is dead
+		else {
+
+			//decrement the alive snake's quantity 
+			snakeManager::alive--;
+
+			//if there no snake alive anymore stop to compute
+			if (snakeManager::alive == 0)return;
+		
+		}
 
 	}
 
