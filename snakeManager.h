@@ -24,4 +24,9 @@ public:
 
 	void compute();
 
+	std::vector<snake*> getBestSnakes(int quantity);
+
+	void sortSnakeVector();
+
+	bool comparator(const snake& fs, const snake& ss);
 };

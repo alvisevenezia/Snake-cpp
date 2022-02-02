@@ -106,3 +106,44 @@ void snakeManager::compute() {
 	}
 
 }
+
+//sort the vector of snakes
+void snakeManager::sortSnakeVector() {
+
+	//use standard function to sort the vector of snake using the given comparator function
+	std::sort(snakeManager::snakeVector.begin(), snakeManager::snakeVector.end(), snakeManager::comparator);
+
+}
+
+//comparator function to sort snake vector
+bool snakeManager::comparator(const snake& fs, const snake& ss) {
+
+	//return true if the left snake has a higher fitness than the one on the right
+	return fs.fitness > ss.fitness;
+
+}
+
+//get the best snakes
+std::vector<snake*> snakeManager::getBestSnakes(int quantity) {
+
+	//sort the snake vector bases on the fitness of the snakes
+	
+	sortSnakeVector();
+
+	//create a vector to store the bests snake
+	std::vector<snake*> best = *(new std::vector<snake*>(quantity));
+
+	for (int id = 0; id < quantity; id++) {
+
+		best.push_back(snakeVector[id]);
+
+	}
+
+}
+
+//merge best snake to create the next population
+void snakeManager::mergeSnakes() {
+
+	
+
+}
