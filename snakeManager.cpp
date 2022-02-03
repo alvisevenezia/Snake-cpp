@@ -139,11 +139,41 @@ std::vector<snake*> snakeManager::getBestSnakes(int quantity) {
 
 	}
 
+
+	return best;
 }
 
 //merge best snake to create the next population
 void snakeManager::mergeSnakes() {
 
-	
+	//store the best snakes
+	std::vector<snake*> best = getBestSnakes(10);
+
+	//clear the curretn snakeVector
+	snakeVector.clear();
+
+	//reduce the size of the vector to save some memory (i guess)
+	snakeVector.shrink_to_fit();
+
+	//init random 
+	srand(time(nullptr));
+
+	snake* snaken;
+
+	for (int id = 0; id <= popNumber; id++) {
+
+		//create a new snake
+		snaken = new snake(nullptr, new matrice(nullptr, size, size));
+
+		//initialize the network
+		snaken->initializeNetwork(size, sizel);
+
+		//merge network of 2 random snakes
+		snaken->networkn->mergeNetworks(best[rand() % 10 + 1]->networkn, best[rand() % 10 + 1]->networkn);
+
+		//put the new snake in the vector
+		snakeVector.push_back(snaken);
+
+	}
 
 }

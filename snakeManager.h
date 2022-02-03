@@ -1,6 +1,7 @@
 #pragma once
 #include "snake.h"
 #include <vector>
+#include <time.h>
 
 class snakeManager {
 
