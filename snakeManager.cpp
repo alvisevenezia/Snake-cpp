@@ -155,6 +155,9 @@ void snakeManager::mergeSnakes() {
 	//reduce the size of the vector to save some memory (i guess)
 	snakeVector.shrink_to_fit();
 
+	//reserve de needed amount of memory
+	snakeVector.reserve(popNumber);
+
 	//init random 
 	srand(time(nullptr));
 
