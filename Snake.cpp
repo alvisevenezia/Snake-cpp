@@ -41,6 +41,13 @@ void snake::spawnSnake(int x,int y) {
 
 }
 
+//spawn apple
+void snake::spawnApple(int x, int y) {
+
+	grillen->mat[x + y * grillen->width] = -1;
+
+}
+
 int snake::move(int *m) {
 
 	assert(head != nullptr);
@@ -79,6 +86,18 @@ int snake::move(int *m) {
 
 			}
 
+			//initialize random 
+			srand(time(nullptr));
+
+			//generate coord
+			int x = rand() % grillen->width;
+			int y = rand() % grillen->height;
+
+			//spawn apple
+			spawnApple(x,y);
+
+			return 1;
+
 		}
 		//check if the snake if about to move on a free place
 		else if (grillen->mat[ty * grillen->width + tx] == 0) {
@@ -103,7 +122,7 @@ int snake::move(int *m) {
 			grillen->mat[ty * grillen->width + tx] = 1;
 			head->x = tx;
 			head->y = ty;
-
+			return 1;
 
 		}
 		else snake::dead = true;

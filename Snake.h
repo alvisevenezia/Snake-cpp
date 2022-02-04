@@ -26,6 +26,8 @@ public:
 	int translateMat(char c);
 
 	long calculateFitness();
+
+	void spawnApple(int x,int y);
 };
 
 

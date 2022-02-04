@@ -2,10 +2,15 @@
 #include "network.h"
 #include "snake.h"
 #include "snakeManager.h"
+#include "gameThread.h"
 
 int main() {
 
-	snakeManager* manager = new snakeManager(1,17, {17*17,50,25,4});
+	int nthread = std::thread::hardware_concurrency() > 1? std::thread::hardware_concurrency()-1 : 1;
+
+	gameThread* game = new gameThread(1*nthread, 17, { 17 * 17,50,25,4 });
+
+	/*snakeManager* manager = new snakeManager(1,17, {17*17,50,25,4});
 
 	manager->createSnake();
 	manager->initGrid(0.0);
@@ -15,6 +20,6 @@ int main() {
 	manager->compute();
 	manager->snakeVector[0]->grillen->printMatInt();
 	manager->compute();
-	manager->snakeVector[0]->grillen->printMatInt();
+	manager->snakeVector[0]->grillen->printMatInt();*/
 
 }
