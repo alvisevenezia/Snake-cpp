@@ -30,7 +30,6 @@ void gameThread::runGame() {
 }
 
 void gameThread::start() {
-	task = &(std::thread(&runGame,this));
 
 	//create snakes
 	manager->createSnake();

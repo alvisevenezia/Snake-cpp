@@ -37,7 +37,6 @@ void computationThread::start() {
 	//create a new thread if it's null
 	if (computationThread::task == nullptr) {
 
-		computationThread::task = &(std::thread(&(computationThread::run), offset, size));
 
 	}
 

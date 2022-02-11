@@ -49,11 +49,11 @@ int* network::compute(matrice* input) {
 
 		//print the results
 		//output->printMatFloat();
-		std::cout << "\n" << std::endl;
+		//std::cout << "\n" << std::endl;
 	}
 
 	//return output;
-	output->printMatFloat();
+	//output->printMatFloat();
 	 
 	//define a buffer
 	int d[4] = { 0,0,0,0 };

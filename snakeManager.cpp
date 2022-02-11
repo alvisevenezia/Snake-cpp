@@ -107,11 +107,17 @@ void snakeManager::compute() {
 
 }
 
+bool compare(const snake* s1, const snake* s2) {
+
+	return s1->fitness > s2->fitness;
+
+}
+
 //sort the vector of snakes
 void snakeManager::sortSnakeVector() {
 
 	//use standard function to sort the vector of snake using the given comparator function
-	std::sort(snakeManager::snakeVector.begin(), snakeManager::snakeVector.end(), snakeManager::comparator);
+	std::sort(snakeManager::snakeVector.begin(), snakeManager::snakeVector.end(),compare);
 
 }
 
